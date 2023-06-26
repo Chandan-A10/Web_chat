@@ -1,0 +1,51 @@
+::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-track{
+    margin-block-end: 6em;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: #00B1FE;
+    border-radius: 100vh;
+}
+.image{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+}
+.name{
+    margin-left: 20px;
+    font-weight: 500;
+    font-size: 1rem;
+}
+.lastmsg{
+    margin-left: 20px;
+    margin-top:-15px ;
+    font-weight: 100;
+    font-size: 0.9rem;
+    color: rgb(140, 139, 139);
+}
+.time{
+    margin-left: 44%;
+    font-size: 0.8rem;
+    color: rgb(140, 139, 139);
+}
+.card :hover{
+    background-color: #00B1FE;
+}
+
+.card :hover .image{
+    width: 52px;
+    height: 52px;
+}
+.card :hover .name{
+    font-size: 1.1rem;
+    color: azure;
+}
+.card :hover .time{
+    color: azure;
+}
+.card :hover .lastmsg{
+    font-size: 0.9rem;
+    color: azure;
+}
