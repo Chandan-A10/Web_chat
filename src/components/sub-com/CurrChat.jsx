@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Container, Image } from 'react-bootstrap'
 import styles from './CurrChat.module.css'
 import image from '../../assests/images/PP.jpeg'
-import { PaperClipOutlined, SendOutlined } from '@ant-design/icons'
+import { PaperClipOutlined, SendOutlined, SmileOutlined } from '@ant-design/icons'
 import { Button, Input } from 'antd'
 import TextArea from 'antd/es/input/TextArea'
 const CurrChat=()=> {
@@ -18,9 +18,12 @@ const CurrChat=()=> {
                     </div>
                 </Card.Body>
             </Card>
+            <div className={styles.msg} style={{backgroundColor:'#00B1FE'}}> 
+              &nbsp;&nbsp;&nbsp;&nbsp;This is a message
+            </div>
             <Card style={{width:'102.5%',marginLeft:'-1.2%',backgroundColor:'white',height:'9%',borderTop:'none',borderLeft:'none',borderRight:'none'}}>
                 <Card.Body>
-                <Input prefix={<PaperClipOutlined />} suffix={<SendOutlined />} size='large' placeholder='Type a message'></Input>
+                <Input prefix={<PaperClipOutlined />} suffix={<><SmileOutlined /><SendOutlined /></>} size='large' placeholder='Type a message'></Input>
                 </Card.Body>
             </Card>
     </Container>

@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+    background: linear-gradient(to bottom, #00B1FE 50%, white 50%);  
+}
+.sub_container{
+    box-shadow: 2px 2px 3px black;
+    border: 2px solid black;
+    backdrop-filter: blur(20px);
+    display: flex;
+    justify-content: space-evenly;
+    border-radius:10px ;
+}
+.img{
+    margin-top:10% ;
+    width: 100%;
+}
+.left_container{
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}

@@ -6,7 +6,7 @@ import styles from './ChatRoom.module.css'
 
 const ChatRoomCmp=()=> {
   return (
-    <div className={styles.container} style={{backgroundColor:'pink',height:'100vh'}}>
+    <div className={styles.container} style={{height:'100vh'}}>
         <Container className={styles.sub_container} style={{backgroundColor:'#F3F3F3',height:'80vh',width:'80vw'}}>
         <SideToolbar></SideToolbar>
         <CurrChat></CurrChat>
