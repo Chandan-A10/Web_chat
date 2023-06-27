@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import { createUserWithEmailAndPassword, getAuth, signOut } from 'firebase/auth'
+import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
+import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore'
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,11 +18,28 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth= getAuth(app)
+export const db=getFirestore(app)
+export const UserCollection=collection(db,'Users')
+export const ChatRoomCollection=collection(db,'ChatRoom')
 
-export const register=async(email,password)=>{
+//get one record from table specific
+// const special=doc(db,'Users/A0FveLRMCVmbSL0lUTep')
+// const doca=await getDoc(special)
+// console.log(doca.data())
+
+// const newDoc= await addDoc(UserCollection,{
+//     name:'Alpha',
+//     date:Date.now()
+// })
+// // console.log(newDoc)
+//  const data=query(collection(db,'Users'),where('name','==','ABC'))
+//  const datadb=await getDocs(data)
+//  datadb.forEach((x)=>console.log(x.data()))
+
+export const register=async(email,password,name)=>{
     try{
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(res)
+        updateProfile(res.user,{displayName:name}).then((x)=>console.log('Success')).catch((err)=>console.log(err))
         return res
     }
     catch(err){
@@ -29,6 +47,31 @@ export const register=async(email,password)=>{
     }
 
 }
+
+export const GoogleAuth=async()=>{
+    const provider = new GoogleAuthProvider();
+    const user=await signInWithPopup(auth,provider)
+    .then((x)=>{
+      return x
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+    return user
+}
+
+export const login=async(email,password)=>{
+    try{
+        const res=await signInWithEmailAndPassword(auth,email,password)
+        console.log(res)
+        return res
+    }
+    catch(error){
+        alert(error)
+        return
+    }
+}
 export const logout=()=>{
     signOut(auth)
 }
+

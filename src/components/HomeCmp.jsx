@@ -1,10 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import styles from './Home.module.css' 
 import web from '../assests/images/web.svg'
 import { Container } from 'react-bootstrap'
 import { Divider } from 'antd'
 import LoginCmp from './LoginCmp'
+import { useSearchParams } from 'react-router-dom'
+import SignUpCmp from './SignUpCmp'
 const HomeCmp=()=> {
+  const [search]=useSearchParams()
+  const status=search.get('status')
   return (
     <>
     <div className={styles.container} style={{height:'100vh'}}>
@@ -13,7 +17,8 @@ const HomeCmp=()=> {
           <img src={web} className={styles.img}></img>
         </Container>
         <Container>
-          <LoginCmp/>
+          {(status===null || status==='login') && <LoginCmp/>}
+          {status==='signup' && <SignUpCmp/>}
         </Container>
         </Container>
     </div>

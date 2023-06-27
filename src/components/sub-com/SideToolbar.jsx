@@ -2,10 +2,10 @@ import React from 'react'
 import { Form, Card, Container, FormControl } from 'react-bootstrap'
 import styles from './SideToolbar.module.css'
 import { UnorderedListOutlined, SearchOutlined } from '@ant-design/icons'
-import { Button, Divider, Input } from 'antd'
+import { Divider, Input } from 'antd'
 import UserList from './UserList'
 
-const SideToolbar=()=> {
+const SideToolbar=({data,setid})=> {
   return (
     <Container  className={styles.container} style={{width:'46%'}}>
         <Card style={{background:'transparent', border:'transparent'}} >
@@ -20,7 +20,7 @@ const SideToolbar=()=> {
             </Card.Body>
         </Card>
         <Divider style={{marginTop:'-0.5%',borderWidth:'2px',marginBottom:'-0.5%'}}/>
-        <UserList></UserList>
+        <UserList data={data} setid={setid}></UserList>
     </Container>
   )
 }
