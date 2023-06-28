@@ -19,10 +19,10 @@ const CurrChat=({chatID,recieverId})=> {
   const [typing, setTyping] = useState(null)
 
   const [recieverName, setrecieverName] = useState('')
-  let chat=false
+  let chat=false  
   const userid=useSelector(state=>state.user)
-
   if(chatID){
+    console.log('q')
     chat=true
     const user=GetASingleUser(recieverId)
     user.then((x)=>{
@@ -41,7 +41,7 @@ const CurrChat=({chatID,recieverId})=> {
       return () => {
             unsubscribe();
       };
-  },[recieverId])
+  },[chatID,userid])
 
   var timer;
   const handleValue=(e)=>{
@@ -51,6 +51,11 @@ const CurrChat=({chatID,recieverId})=> {
       SetTypinginChatRoomFalse(chatID,recieverId)
     }, 2000);
     setvalue(e.target.value)
+  }
+  const keydown=(e)=>{
+    if(e.key==='Enter'){
+      handleClick(e)
+    }
   }
   const handleClick=(e)=>{
     console.log(value)
@@ -74,7 +79,7 @@ const CurrChat=({chatID,recieverId})=> {
                     <Image src={image} className={styles.image}></Image>
                     <div style={{marginTop:'-1%'}}>
                     <p className={styles.name}>{recieverName}</p>
-                    <p className={styles.lastmsg}>{typing?'typing...':'Not typing...'}</p>
+                    <p className={styles.lastmsg} style={typing?{color:'green'}:{color:'grey'}}>{typing?'typing...':'Not typing...'}</p>
                     </div>
                 </Card.Body>
             </Card>
@@ -82,7 +87,7 @@ const CurrChat=({chatID,recieverId})=> {
             {chat && <ChatWindow chatID={chatID}/>}
             <Card style={{width:'102.5%',marginLeft:'-1.2%',backgroundColor:'white',height:'9%',borderTop:'none',borderLeft:'none',borderRight:'none'}}>
                 <Card.Body>
-                <Input value={value} onChange={handleValue} prefix={<PaperClipOutlined style={{cursor:'pointer'}} />} suffix={<><SmileOutlined style={{cursor:'pointer'}}/><SendOutlined onClick={handleClick} /></>} size='large' placeholder='Type a message'></Input>
+                <Input onKeyDown={keydown} value={value} onChange={handleValue} prefix={<PaperClipOutlined style={{cursor:'pointer'}} />} suffix={<><SmileOutlined style={{cursor:'pointer'}}/><SendOutlined onClick={handleClick} /></>} size='large' placeholder='Type a message'></Input>
                 </Card.Body>
             </Card>
     </Container>

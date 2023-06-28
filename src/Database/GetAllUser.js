@@ -1,21 +1,28 @@
-import { getDocs, onSnapshot, query } from "firebase/firestore"
-import { UserCollection } from "../firebase/firebase"
+import { getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { UserCollection } from "../firebase/firebase";
 
-export const getAllUser=async(onSnapshotCallback)=>{
-    const qry=query(UserCollection)
-    const data=await getDocs(qry)
-    const userDetails=[]
-    data.forEach(x=>{
-        userDetails.push(x.data())
-        onSnapshot(x.ref,(snap)=>{
-            const updateUserDetails=snap.data()
-            const index=userDetails.findIndex((user)=>user.userID===updateUserDetails.userID)
-            if(index!==-1){
-                userDetails[index]=updateUserDetails
-                onSnapshotCallback(userDetails)
-            }
-        })
-    })
-    console.log(userDetails)
-    return userDetails
-}
+export const getAllUser = (onSnapshotCallback) => {
+  const qry = query(UserCollection);
+  const userDetails = [];
+
+  const unsubscribeSnapshots = onSnapshot(qry, (snapshot) => {
+    snapshot.docChanges().forEach((change) => {
+      const docData = change.doc.data();
+      const index = userDetails.findIndex((user) => user.userID === docData.userID);
+
+      if (change.type === "added" && index === -1) {
+        userDetails.push(docData);
+      } else if (change.type === "modified" && index !== -1) {
+        userDetails[index] = docData;
+      } else if (change.type === "removed" && index !== -1) {
+        userDetails.splice(index, 1);
+      }
+    });
+
+    onSnapshotCallback([...userDetails]);
+  });
+
+  return unsubscribeSnapshots;
+};
+
+

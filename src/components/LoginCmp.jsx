@@ -18,7 +18,7 @@ const LoginCmp=()=> {
 
   const signInWithGoogle = async() => {
     const user=await GoogleAuth()
-    dispatchor(setUser(user.user.uid))
+    dispatchor(setUser(user?.user.uid))
     navigate('/chatroom')
   }
 

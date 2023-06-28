@@ -3,12 +3,14 @@ import styles from './ChatWindow.module.css'
 import { GetChats } from '../../Database/GetChats'
 import { Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
+import { formatDate } from '../../firebase/Datehandler'
 
 const ChatWindow=({chatID})=>{
     console.log(chatID)
     const [chats, setchats] = useState(null)
     const Curruser=useSelector(state=>state.user)
     useEffect(()=>{
+        console.log('abc')
         const onSnapshotCallback=(newdata)=>{
             setchats(newdata)
         }

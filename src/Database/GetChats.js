@@ -18,6 +18,7 @@ export const GetChats=async(chatid,onSnapshotCallback)=>{
                 }
             }
         })
+        console.log('chats')
     })
     return chatdata;
 }

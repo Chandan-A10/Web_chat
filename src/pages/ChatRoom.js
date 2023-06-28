@@ -9,12 +9,17 @@ const ChatRoom=()=> {
   const user=useSelector(state=>state.user)
   const [userdata, setuserdata] = useState(null)
 
-  useEffect(()=>{
-    const onSnapshotCallback=(newdata)=>{
-        setuserdata(newdata)
-    }
-    getAllUser(onSnapshotCallback) 
-  },[userdata])
+  useEffect(() => {
+    const onSnapshotCallback = (newdata) => {
+      setuserdata(newdata);
+    };
+  
+    const unsubscribe = getAllUser(onSnapshotCallback);
+  
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   if(user===''){
     navigate('/')

@@ -8,12 +8,12 @@ import { GoogleLogin } from "../Database/GoogleLogin";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDyeqH_o2JldgJXbU8IXnnkodXRs_HRsuc",
-    authDomain: "react-auth-c8275.firebaseapp.com",
-    projectId: "react-auth-c8275",
-    storageBucket: "react-auth-c8275.appspot.com",
-    messagingSenderId: "811948791624",
-    appId: "1:811948791624:web:4b7d71c640883dc4c5857d"
+    apiKey: "AIzaSyCJ0CSUPGULfJbpCcxfEn04Yz98ZpJhVDs",
+    authDomain: "webchat-45466.firebaseapp.com",
+    projectId: "webchat-45466",
+    storageBucket: "webchat-45466.appspot.com",
+    messagingSenderId: "650062979991",
+    appId: "1:650062979991:web:8da8f0eea896a988bddad2"
 };
 
 // Initialize Firebase

@@ -36,7 +36,7 @@ const UserList=({data,setid})=> {
             )
         })
         :
-        <h3>No data found</h3>}
+        <div class={styles.custom_Loaders}></div>}
         </div>
     </>
   )
