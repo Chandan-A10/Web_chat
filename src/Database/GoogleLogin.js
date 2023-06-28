@@ -9,7 +9,9 @@ export const GoogleLogin=async(userid,name)=>{
     }
     const newDoc= await addDoc(UserCollection,{
         userID:userid,
-        name:name
+        name:name,
+        online:true,
+        typing:false,
     })
-    console.log('User Added')
+    console.log('User Added' ,newDoc)
 }

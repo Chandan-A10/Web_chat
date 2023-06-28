@@ -1,7 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
-import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore'
+import { collection, getFirestore } from 'firebase/firestore'
 import { GoogleLogin } from "../Database/GoogleLogin";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -40,7 +40,7 @@ export const ChatRoomCollection=collection(db,'ChatRoom')
 export const register=async(email,password,name)=>{
     try{
         const res = await createUserWithEmailAndPassword(auth, email, password);
-        updateProfile(res.user,{displayName:name}).then((x)=>console.log('Success')).catch((err)=>console.log(err))
+        updateProfile(res.user,{displayName:name}).then((x)=>console.log('Successfully updated name')).catch((err)=>console.log(err))
         return res
     }
     catch(err){
@@ -73,6 +73,7 @@ export const login=async(email,password)=>{
         return
     }
 }
+
 export const logout=()=>{
     signOut(auth)
 }

@@ -10,14 +10,11 @@ const ChatRoom=()=> {
   const [userdata, setuserdata] = useState(null)
 
   useEffect(()=>{
-    const details=getAllUser()
-    details.then((res)=>{
-      setuserdata(res)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  },[])
+    const onSnapshotCallback=(newdata)=>{
+        setuserdata(newdata)
+    }
+    getAllUser(onSnapshotCallback) 
+  },[userdata])
 
   if(user===''){
     navigate('/')

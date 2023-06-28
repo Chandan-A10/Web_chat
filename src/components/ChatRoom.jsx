@@ -4,18 +4,21 @@ import CurrChat from './sub-com/CurrChat'
 import { Container } from 'react-bootstrap'
 import styles from './ChatRoom.module.css'
 import { useSelector } from 'react-redux'
+import { CreateChatRoom } from '../Database/CreateChatroom'
 
 const ChatRoomCmp=({data})=> {
   const [chatID, setchatID] = useState(null)
   const [recieverId, setrecieverId] = useState(null)
   const userid=useSelector(state=>state.user)
-  const seId=(id)=>{
+  const seId=async(id)=>{
     setrecieverId(id)
     if(id>userid){
       setchatID(userid+id)
+      await CreateChatRoom(userid+id)
     }
     else{
       setchatID(id+userid)
+      await CreateChatRoom(id+userid)
     }
   }
   return (

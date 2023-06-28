@@ -12,3 +12,4 @@ export const GetASingleUser=async(id)=>{
     console.log(user)
     return user;
 }
+

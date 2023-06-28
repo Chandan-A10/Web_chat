@@ -1,28 +1,18 @@
 import React, { useEffect, useState } from 'react'
 import styles from './ChatWindow.module.css'
 import { GetChats } from '../../Database/GetChats'
-import { CreateChatRoom } from '../../Database/CreateChatroom'
 import { Container } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 
 const ChatWindow=({chatID})=>{
+    console.log(chatID)
     const [chats, setchats] = useState(null)
     const Curruser=useSelector(state=>state.user)
     useEffect(()=>{
-        const chats=GetChats(chatID)
-        chats.then((res)=>{
-            console.log(res)
-            if(res){
-                setchats(res)
-            }
-            else{
-                CreateChatRoom(chatID)
-                setchats([])
-            }
-        })                 
-        .catch((err)=>{
-            console.log(err)
-        })
+        const onSnapshotCallback=(newdata)=>{
+            setchats(newdata)
+        }
+        const unsubscribe=GetChats(chatID,onSnapshotCallback)
     },[chatID])
 
     return (
@@ -30,24 +20,23 @@ const ChatWindow=({chatID})=>{
         <Container className={styles.container}>
             {chats?chats.map((x)=>(
                 <>
-                {console.log(x.senderID,'Hell')}
                 {x.senderId!==Curruser?
                 <>
-                <div className={styles.left}>
+                <div className={styles.main}>
                 <br/>
                 <br/>
-                <div className={styles.msg} style={{backgroundColor:'#00B1FE'}}>
+                <div className={styles.sender} style={{backgroundColor:'#00B1FE'}}>
                     <p className={styles.text}>{x.text}</p>
                 </div>
                 </div>
                 </>
                 :
                 <>
-                <div className={styles.right}>
+                <div className={styles.main} style={{justifyContent:'right'}}>
                 <br/>
                 <br/>
-                <div className={styles.sender} style={{backgroundColor:'#00B1FE'}}>
-                    <p className={styles.text}>{x.text}</p>
+                <div className={styles.reciever} style={{minWidth:'20%',display:'flex',justifyContent:'çenter',alignItems:'center',backgroundColor:'#00B1FE',borderRadius: '10px 0 10px 10px'}}>
+                    <p className={styles.text} style={{marginLeft:'10%',marginTop:'10%'}}>{x.text}</p>
                 </div>
                 </div>
                 </>

@@ -33,7 +33,6 @@
 .card :hover{
     background-color: #00B1FE;
 }
-
 .card :hover .image{
     width: 52px;
     height: 52px;

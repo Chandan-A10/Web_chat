@@ -1,12 +1,12 @@
 import React, { useRef, useState } from 'react'
 import { Card, Form, Button, Alert, Container } from 'react-bootstrap'
 import { Link, useNavigate } from 'react-router-dom'
-import { auth, login, register, GoogleAuth } from '../firebase/firebase'
+import { login, GoogleAuth } from '../firebase/firebase'
 import styles from './Login.module.css'
 import { Divider } from 'antd'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setUser } from '../reducers/userSlice'
+import { SetOnline } from '../Database/SetOffline'
 
 const LoginCmp=()=> {
   const emailRef=useRef()
@@ -15,7 +15,6 @@ const LoginCmp=()=> {
   const [loading, setLoading] = useState(false)
   const dispatchor=useDispatch()
   const navigate=useNavigate()
-  const Curruser=useSelector(state=>state.user)
 
   const signInWithGoogle = async() => {
     const user=await GoogleAuth()
@@ -34,6 +33,7 @@ const LoginCmp=()=> {
       setLoading(false)
       if(user){
         dispatchor(setUser(user.user.uid))
+        SetOnline(user.user.uid)
         navigate('/chatroom')
       }
   }

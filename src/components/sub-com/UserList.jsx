@@ -2,11 +2,12 @@ import React from 'react'
 import styles from './UserList.module.css'
 import { Card, Image } from 'react-bootstrap'
 import image from '../../assests/images/avatar.png'
+import online from '../../assests/images/online.png'
+import offline from '../../assests/images/offline.png'
 import { useSelector } from 'react-redux'
 
 const UserList=({data,setid})=> {
     const Curruser=useSelector(state=>state.user)
-    console.log(data)
     const setchatId=(ID)=>{
         setid(ID)
     }
@@ -14,7 +15,7 @@ const UserList=({data,setid})=> {
     <>
     <div className={styles.main} style={{maxHeight:'83%',overflow:'scroll'}}>
         {data?
-        data.map((user)=>{
+        data.map((user,i)=>{
             return(
             <>
             {user.userID!==Curruser &&
@@ -25,7 +26,7 @@ const UserList=({data,setid})=> {
                     </div>
                     <div>
                         <p className={styles.name} style={{width:"150px",height:"20px",overflow:'hidden',whiteSpace:'nowrap'}}>{user.name}</p>
-                        <p className={styles.lastmsg} style={{width:"150px",height:"20px",overflow:'hidden',whiteSpace:'nowrap'}}>History message</p>
+                        <p className={styles.lastmsg} style={{width:"150px",height:"20px",overflow:'hidden',whiteSpace:'nowrap'}}><img style={{borderRadius:'50%'}} height='7px' width='7px' src={user.online?online:offline} alt='on'/>&nbsp;{user.online?'online':'offline'}</p>
                     </div>
                     <p className={styles.time}>14.20&nbsp;PM</p>
                 </Card.Body>
