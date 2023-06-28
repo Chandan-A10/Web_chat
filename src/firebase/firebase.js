@@ -2,6 +2,7 @@
 import { initializeApp } from "firebase/app";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth'
 import { addDoc, collection, doc, getDoc, getDocs, getFirestore, query, where } from 'firebase/firestore'
+import { GoogleLogin } from "../Database/GoogleLogin";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -52,7 +53,8 @@ export const GoogleAuth=async()=>{
     const provider = new GoogleAuthProvider();
     const user=await signInWithPopup(auth,provider)
     .then((x)=>{
-      return x
+      GoogleLogin(x.user.uid,x.user.displayName)
+      return x;
     })
     .catch((err)=>{
       console.log(err)

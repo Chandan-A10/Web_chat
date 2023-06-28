@@ -1,7 +1,7 @@
 import React from 'react'
 import styles from './UserList.module.css'
 import { Card, Image } from 'react-bootstrap'
-import image from '../../assests/images/PP.jpeg'
+import image from '../../assests/images/avatar.png'
 import { useSelector } from 'react-redux'
 
 const UserList=({data,setid})=> {

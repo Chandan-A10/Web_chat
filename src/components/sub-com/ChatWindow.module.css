@@ -1,7 +1,48 @@
-.msg{
-    width:30%;
-    padding: 12px;
-    color:white;
-    border-radius: 0px 21px 21px 21px;
-    height: 6.5%;
+.msg {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 50px;
+    padding: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    border-radius: 0px 10px 10px 10px;
+
+}
+.container{
+    background-color: black;
+    height: 80%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+
+}
+.text{
+    color: azure;
+}
+.sender{
+    margin-left: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+    min-width: 10%;
+    /* Additional styling for demonstration purposes */
+    background-color: lightgreen;
+    padding: 10px;
+    border-radius: 10px;
+    display: inline-block;
+    border-radius: 10px 0px 10px 10px;
+}
+.right{
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    justify-content: right;
+    background-color: aliceblue;
+    width: 50%;
+    right: 0;
+    position: relative;
 }
