@@ -9,9 +9,9 @@ import ChatWindow from './ChatWindow'
 import { UpdateChats } from '../../Database/UpdateChat'
 import { useSelector } from 'react-redux'
 import { GetASingleUser } from '../../Database/GetASingleUser'
-import { SetTypingFalse, SetTypingTrue } from '../../Database/SetTyping'
 import { onSnapshot, query, where } from 'firebase/firestore'
-import { UserCollection } from '../../firebase/firebase'
+import { ChatRoomCollection } from '../../firebase/firebase'
+import { SetTypinginChatRoomFalse, SetTypinginChatRoomTrue } from '../../Database/TypingInChatRoom'
 
 
 const CurrChat=({chatID,recieverId})=> {
@@ -29,28 +29,26 @@ const CurrChat=({chatID,recieverId})=> {
       setrecieverName(x)
     })
   }
-  
-  useEffect(() => {
-    const qry = query(UserCollection, where("userID", "==", recieverId));
+  useEffect(()=>{
+    const qry = query(ChatRoomCollection, where("chatID", "==", chatID));
     const unsubscribe = onSnapshot(qry, (snapshot) => {
-      let typingStatus = false;
-      snapshot.forEach((doc) => {
-        typingStatus = doc.data().typing;
+        let typingStatus = false;
+        snapshot.forEach((doc) => {
+          typingStatus = doc.data()[userid];
+        });
+        setTyping(typingStatus);
       });
-      setTyping(typingStatus);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  },[recieverId]);
+      return () => {
+            unsubscribe();
+      };
+  },[recieverId])
 
   var timer;
   const handleValue=(e)=>{
-    SetTypingTrue(userid)
+    SetTypinginChatRoomTrue(chatID,recieverId)
     clearInterval(timer)
     timer=setTimeout(() => {
-      SetTypingFalse(userid)
+      SetTypinginChatRoomFalse(chatID,recieverId)
     }, 2000);
     setvalue(e.target.value)
   }

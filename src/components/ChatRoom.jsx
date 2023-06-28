@@ -14,11 +14,11 @@ const ChatRoomCmp=({data})=> {
     setrecieverId(id)
     if(id>userid){
       setchatID(userid+id)
-      await CreateChatRoom(userid+id)
+      await CreateChatRoom(userid+id,userid,id)
     }
     else{
       setchatID(id+userid)
-      await CreateChatRoom(id+userid)
+      await CreateChatRoom(id+userid,userid,id)
     }
   }
   return (
