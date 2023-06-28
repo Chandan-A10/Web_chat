@@ -46,7 +46,7 @@ const CurrChat=({chatID,recieverId})=> {
   var timer;
   const handleValue=(e)=>{
     SetTypinginChatRoomTrue(chatID,recieverId)
-    clearInterval(timer)
+    clearTimeout(timer)
     timer=setTimeout(() => {
       SetTypinginChatRoomFalse(chatID,recieverId)
     }, 2000);
