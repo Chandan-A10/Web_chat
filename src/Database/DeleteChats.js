@@ -1,4 +1,4 @@
-import { arrayUnion, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore"
+import { getDocs, query, setDoc } from "firebase/firestore"
 import { ChatRoomCollection,  } from "../firebase/firebase"
 
 

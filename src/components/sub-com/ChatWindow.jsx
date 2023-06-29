@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 import { formatDate } from '../../firebase/Datehandler'
 import { Divider } from 'antd'
 
-const ChatWindow=({chatID})=>{
+const ChatWindow=React.memo(({chatID})=>{
     let date={
         today:true,
         yestarday:true,
@@ -40,7 +40,7 @@ const ChatWindow=({chatID})=>{
         const onSnapshotCallback=(newdata)=>{
             setchats(newdata)
         }
-        const unsubscribe=GetChats(chatID,onSnapshotCallback)
+        GetChats(chatID,onSnapshotCallback)
     },[chatID])
 
     return (
@@ -84,6 +84,6 @@ const ChatWindow=({chatID})=>{
         </Container>
         </>
     )
-}
+})
 
 export default ChatWindow

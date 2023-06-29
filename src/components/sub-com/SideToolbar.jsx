@@ -9,7 +9,9 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { logoutUser } from '../../reducers/userSlice'
 import { SetOffline } from '../../Database/SetOffline'
-const SideToolbar=({data,setid})=> {
+
+const SideToolbar=React.memo(({data,setid})=> {
+  console.log('SideToolbarCmp')
   const user=useSelector(state=>state.user)
   
   const dispatcher=useDispatch()
@@ -39,6 +41,6 @@ const SideToolbar=({data,setid})=> {
         <UserList data={data} setid={setid}></UserList>
     </Container>
   )
-}
+})
 
 export default SideToolbar

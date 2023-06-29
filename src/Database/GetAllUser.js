@@ -1,4 +1,4 @@
-import { getDocs, onSnapshot, query, where } from "firebase/firestore";
+import { onSnapshot, query } from "firebase/firestore";
 import { UserCollection } from "../firebase/firebase";
 
 export const getAllUser = (onSnapshotCallback) => {

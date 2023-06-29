@@ -6,7 +6,8 @@ import styles from './ChatRoom.module.css'
 import { useSelector } from 'react-redux'
 import { CreateChatRoom } from '../Database/CreateChatroom'
 
-const ChatRoomCmp=({data})=> {
+const ChatRoomCmp=React.memo(({data})=> {
+  console.log('ChatRoomCmp')
   const [chatID, setchatID] = useState(null)
   const [recieverId, setrecieverId] = useState(null)
   const userid=useSelector(state=>state.user)
@@ -29,6 +30,6 @@ const ChatRoomCmp=({data})=> {
         </Container>
     </div>
   )
-}
+})
 
 export default ChatRoomCmp

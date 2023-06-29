@@ -4,7 +4,8 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { getAllUser } from '../Database/GetAllUser'
 
-const ChatRoom=()=> {
+const ChatRoom=React.memo(()=> {
+  console.log('Chatroom')
   const navigate=useNavigate()
   const user=useSelector(state=>state.user)
   const [userdata, setuserdata] = useState(null)
@@ -29,6 +30,6 @@ const ChatRoom=()=> {
   return (
     <ChatRoomCmp data={userdata}/>
   )
-}
+})
 
 export default ChatRoom

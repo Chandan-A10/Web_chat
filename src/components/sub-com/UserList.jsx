@@ -6,7 +6,8 @@ import online from '../../assests/images/online.png'
 import offline from '../../assests/images/offline.png'
 import { useSelector } from 'react-redux'
 
-const UserList=({data,setid})=> {
+const UserList=React.memo(({data,setid})=> {
+    console.log('UserListCmp')
     const Curruser=useSelector(state=>state.user)
     const setchatId=(ID)=>{
         setid(ID)
@@ -40,6 +41,6 @@ const UserList=({data,setid})=> {
         </div>
     </>
   )
-}
+})
 
 export default UserList
