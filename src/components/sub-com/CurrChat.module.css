@@ -23,3 +23,11 @@
     font-size: 0.9rem;
     color: rgb(140, 139, 139);
 }
+.clear{
+    min-height: 30%;
+}
+.clear :hover{
+    width:110%;
+    height: 60%;
+    cursor: pointer;
+}

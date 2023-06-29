@@ -6,7 +6,6 @@ export const registerUser=async(userid,name)=>{
         userID:userid,
         name:name,
         online:true,
-        typing:false,
     })
     return newDoc
 }

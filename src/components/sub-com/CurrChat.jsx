@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { Card, Container, Image } from 'react-bootstrap'
 import styles from './CurrChat.module.css'
 import image from '../../assests/images/PP.jpeg'
-import { PaperClipOutlined, SendOutlined, SmileOutlined } from '@ant-design/icons'
-import { Input } from 'antd'
+import { ClearOutlined,PaperClipOutlined, SendOutlined, SmileOutlined } from '@ant-design/icons'
+import { Button, Input, Tooltip } from 'antd'
 
 import ChatWindow from './ChatWindow'
 import { UpdateChats } from '../../Database/UpdateChat'
@@ -12,6 +12,7 @@ import { GetASingleUser } from '../../Database/GetASingleUser'
 import { onSnapshot, query, where } from 'firebase/firestore'
 import { ChatRoomCollection } from '../../firebase/firebase'
 import { SetTypinginChatRoomFalse, SetTypinginChatRoomTrue } from '../../Database/TypingInChatRoom'
+import { DeleteChats } from '../../Database/DeleteChats'
 
 
 const CurrChat=({chatID,recieverId})=> {
@@ -70,6 +71,10 @@ const CurrChat=({chatID,recieverId})=> {
     setvalue('')
     UpdateChats(chatID,obj)
   }
+  const handleClear=()=>{
+    console.log('sdjkhjk')
+    DeleteChats(chatID,userid)
+  }
   return (
     <>
     <Container className={styles.container} style={{backgroundColor:'#F8F9F8'}}>
@@ -81,6 +86,10 @@ const CurrChat=({chatID,recieverId})=> {
                     <p className={styles.name}>{recieverName}</p>
                     <p className={styles.lastmsg} style={typing?{color:'green'}:{color:'grey'}}>{typing?'typing...':'Not typing...'}</p>
                     </div>
+                    <Tooltip title='Clear Chats' >
+                    <ClearOutlined className={styles.clear} style={{marginLeft:'70%'}} onClick={handleClear}/>
+                    </Tooltip>
+                
                 </Card.Body>
             </Card>
             }

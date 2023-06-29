@@ -11,7 +11,6 @@ export const GoogleLogin=async(userid,name)=>{
         userID:userid,
         name:name,
         online:true,
-        typing:false,
     })
     console.log('User Added' ,newDoc)
 }
