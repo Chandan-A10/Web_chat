@@ -7,8 +7,31 @@ import { formatDate } from '../../firebase/Datehandler'
 import { Divider } from 'antd'
 
 const ChatWindow=({chatID})=>{
-    const [date, setdate] = useState({today:null,yestarday:null})
-    const [print, setprint] = useState()
+    let date={
+        today:true,
+        yestarday:true,
+        date:null
+    }
+
+    const checkDate=(timestp)=>{
+        const day=formatDate(timestp)
+        if(day==='Today' && date.today){
+            date.today=false
+            return 'Today'
+        }
+        else if(day==='Yesterday' && date.yestarday){
+            date.yestarday=false
+            return 'Yestarday'
+        }
+        else if(date.date!==day){
+            date.date=day
+            return day
+        }
+        else{
+            return false
+        }
+
+    }
     console.log(chatID)
     const [chats, setchats] = useState(null)
     const Curruser=useSelector(state=>state.user)
@@ -29,6 +52,7 @@ const ChatWindow=({chatID})=>{
                 <>
                 {x.senderId!==Curruser?
                 <>
+                {checkDate(x.time) && <Divider>{checkDate(x.time)}</Divider>}
                 <div className={styles.main}>
                 <br/>
                 <br/>
@@ -39,6 +63,7 @@ const ChatWindow=({chatID})=>{
                 </>
                 :
                 <>
+                {checkDate(x.time) && <Divider>{checkDate(x.time)}</Divider>}
                 <div className={styles.main} style={{justifyContent:'right'}}>
                 <br/>
                 <br/>
